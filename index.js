@@ -10,10 +10,21 @@ const storage = {
 };
 
 app.get('/one', (req, res) => {
-  res.status(200).send(req.query.upper === false ? storage.message.toUpperCase() : storage.message);
+  console.log('/one req data is:', req)
+  res.status(200).send(req.query.upper === true ? storage.message.toUpperCase() : storage.message);
 });
 
+app.get('/two', (req, res) => {
+  res.status(200).send(req.query.upper === false ? storage.message.toUpperCase() : storage.message);
+})
+
+app.get('/three', (req, res) => {
+  res.status(200).send(storage.message)
+})
+
 app.post('/two', (req, res) => {
+  console.log('req.body received is:', req.body)
+
   if(req.body.key && req.body.value){
     storage[req.body.key] = req.body.value;
     res.status(200).send(`Successfully stored ${req.body.key} with value ${req.body.value}`);

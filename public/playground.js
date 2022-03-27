@@ -8,15 +8,63 @@ const btnOne = document.getElementById('one');
 const btnTwo = document.getElementById('two');
 const btnThree = document.getElementById('three');
 
+// TODO: Make a network request inside this handler to endpoint one.
+// Be sure to send any information the server needs to process the request!
 btnOne.onclick = function handleOneClick (e) {
-  // TODO: Make a network request inside this handler to endpoint one.
-  // Be sure to send any information the server needs to process the request!
+  axios.get('/one')
+    .then(res => {
+      console.log('btnOne fetches data:', res.data);
+    })
+    .catch(err => {
+      console.log('btnOne:', err);
+    })
 };
+
+// TODO: Make a network request inside this handler to endpoint two.
+// Be sure to send any information the server needs to process the request!
 btnTwo.onclick = function handleTwoClick (e) {
-  // TODO: Make a network request inside this handler to endpoint two.
-  // Be sure to send any information the server needs to process the request!
+  let newMsg = {
+    key: 'message',
+    value: 'New message'
+  };
+
+  axios.post('/two', newMsg)
+    .then(res => {
+      console.log('btn2 success:', res);
+    })
+    .catch(err => {
+      console.log('btn2 failed:', err);
+    })
+
+  axios.get('/two')
+    .then(res => {
+      console.log('btnTwo fetches data:', res.data);
+    })
+    .catch(err => {
+      console.log('btnTwo:', err);
+    })
 };
+
+// TODO: Make a network request inside this handler to endpoint three.
+// Be sure to send any information the server needs to process the request!
 btnThree.onclick = function handleThreeClick (e) {
-  // TODO: Make a network request inside this handler to endpoint three.
-  // Be sure to send any information the server needs to process the request!
+  let editMsg = {
+    message: '<No More Hello World>'
+  };
+
+  axios.put('/three', editMsg)
+    .then(res => {
+      console.log('btnThree success!', res.data)
+    })
+    .catch(err => {
+      console.log('btnThree failed')
+    })
+
+    axios.get('/three')
+      .then(res => {
+        console.log('btnThree fetches data:', res.data)
+      })
+      .catch(err => {
+        console.log('btnThree failed to fetch data:', err)
+      })
 };
